@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Search from "../Components/Search/Search";
 import Result from "../Components/Result/Result";
+import MatchHistory from "../Components/MatchHistory/MatchHistory";
 import React, { useState } from "react";
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
             <div className={styles.grid}>
                <Search result={result} setResult={setResult}></Search>
                <Result result={result}></Result>
+               <MatchHistory result={result}></MatchHistory>
             </div>
          </main>
 

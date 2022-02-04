@@ -5,6 +5,7 @@ export default function Search({ setResult, result }) {
    const [input, setInput] = useState("");
    const [sumID, setSumID] = useState("");
    const [sumPUUID, setSumPUUID] = useState("");
+   const [matchID, setMatchID] = useState("");
 
    async function getID() {
       const req = await fetch(`./api/fetchID`, {
@@ -28,12 +29,12 @@ export default function Search({ setResult, result }) {
                puuid: sumPUUID,
             },
          });
-         const res = await req.json();
-         console.log(res);
-         return res;
+         const matchIDs = await req.json();
+
+         setResult({ ...result, matchIDs });
       }
-      const data = getBasicData();
-      return data;
+      getBasicData();
+      console.log(result);
    }, [sumPUUID]);
 
    function handleInput(e) {
@@ -43,7 +44,9 @@ export default function Search({ setResult, result }) {
    function handleClick(e) {
       e.preventDefault();
       getID();
+      setInput("");
    }
+
    return (
       <>
          <form action="">
