@@ -1,12 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const APIKEY = process.env.APIKEY;
-console.log(APIKEY);
 
 export default async function handler(req, res) {
+   console.log(req.headers.id);
    const data = async function () {
       const request = await fetch(
-         `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.headers.name}`,
+         `https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${req.headers.id}`,
          {
             method: "GET",
             headers: {
@@ -19,5 +19,6 @@ export default async function handler(req, res) {
       return response;
    };
    const result = await data();
-   res.status(200).json(result);
+   console.log(result);
+   res.status(200).json({ name: req.name, payload: result });
 }
